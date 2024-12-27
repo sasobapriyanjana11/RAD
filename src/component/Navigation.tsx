@@ -10,14 +10,16 @@ export function Navigation() {
                         <Link to='/add'>Add Customer</Link>
                         <Link to='/delete'>Delete Customer</Link>
                         <Link to='/update'>Update Customer</Link>
+                        <Link to="/add-item">Add Item</Link>
+                         <Link to="/delete-item">Delete Item</Link>
+                         <Link to="/update-item">Update Item</Link>
+
                     </ul>
                 </nav>
             </header>
         </>
     )
 }
-
-
 
 
 // import {Link} from "react-router";

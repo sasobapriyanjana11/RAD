@@ -7,6 +7,10 @@ import {UpdateCustomer} from "./Pages/UpdateCustomer.tsx";
 import {DeleteCustomer} from "./Pages/DeleteCustomer.tsx";
 import {RootLayout} from "./component/RootLayout.tsx";
 import {CustomerProvider} from "./store/CustomerProvider.tsx";
+import {AddItem} from "./Pages/AddItem.tsx";
+import {UpdateItem} from "./Pages/UpdateItem.tsx";
+import {DeleteItem} from "./Pages/DeleteItem.tsx";
+import {ItemProvider} from "./store/ItemProvider.tsx";
 function App() {
 
     const routes = createBrowserRouter([
@@ -17,16 +21,24 @@ function App() {
                 { path : '', element : <Dashboard/>},
                 { path : '/add', element : <AddCustomer/>},
                 { path : '/delete', element : <DeleteCustomer/>},
-                { path : '/update', element : <UpdateCustomer/>}
+                { path : '/update', element : <UpdateCustomer/>},
+                { path: "/add-item", element: <AddItem /> }, // Added route for adding an item
+               { path: "/update-item", element: <UpdateItem /> }, // Added route for updating an item
+                { path: "/delete-item", element: <DeleteItem /> }
             ]
         },
     ])
 
     return (
         <>
-            <CustomerProvider>
-                <RouterProvider router={routes} />
-            </CustomerProvider>
+            {/*<CustomerProvider>*/}
+            {/*    <RouterProvider router={routes} />*/}
+            {/*</CustomerProvider>*/}
+            <ItemProvider>
+                            <CustomerProvider>
+                              <RouterProvider router={routes} />
+                           </CustomerProvider>
+             </ItemProvider>
         </>
     );
 }
