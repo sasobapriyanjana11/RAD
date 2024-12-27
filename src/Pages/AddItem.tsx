@@ -1,28 +1,33 @@
 import {useState, useContext} from "react";
 import {Item} from "../models/Item.ts";
 import {ItemContext} from "../store/ItemProvider.tsx";
+import {useNavigate} from "react-router";
+import {ItemModal} from "../component/ItemModal.tsx";
 
 export function AddItem() {
+
+    const navigate = useNavigate();
+    const [items, dispatch] = useContext(ItemContext);
+
     const [code, setCode] = useState("");
     const [name, setName] = useState("");
     const [price, setPrice] = useState<number>(0);
     const [quantity, setQuantity] = useState<number>(0);
 
-    const [items, setItems] = useContext(ItemContext);
+
 
     function handleSubmit() {
-        const newItem: Item = new Item(code, name, price, quantity);
-        setItems((prevItems: Item[]) => [...prevItems, newItem]);
+        const newItem= new Item(code, name, price, quantity);
+        // setItems((prevItems: Item[]) => [...prevItems, newItem]);
+        dispatch({type: 'ADD_ITEM', payload: newItem});
+        navigate('/');
     }
 
     return (
         <>
-            <h1>Add Item</h1>
-            <input type="text" placeholder="Code" onChange={(e) => setCode(e.target.value)} />
-            <input type="text" placeholder="Name" onChange={(e) => setName(e.target.value)} />
-            <input type="number" placeholder="Price" onChange={(e) => setPrice(Number(e.target.value))} />
-            <input type="number" placeholder="Quantity" onChange={(e) => setQuantity(Number(e.target.value))} />
-            <button onClick={handleSubmit}>Add Item</button>
+            <header><h2>Add Item</h2></header>
+            <br/>
+            <ItemModal handleSubmit={handleSubmit} setCode={setCode} setName={setName} setPrice={setPrice} setQuantity={setQuantity} >Add Item</ItemModal>
         </>
     );
 }
