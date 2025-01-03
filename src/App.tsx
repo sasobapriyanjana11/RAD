@@ -11,61 +11,27 @@ import {AddItem} from "./Pages/AddItem.tsx";
 import {UpdateItem} from "./Pages/UpdateItem.tsx";
 import {DeleteItem} from "./Pages/DeleteItem.tsx";
 import {ItemProvider} from "./store/ItemProvider.tsx";
+import {useDispatch, useSelector} from "react-redux";
+import { Store } from './store/Store.ts';
 function App() {
+    const count=useSelector((state: number) => state);
 
-    const routes = createBrowserRouter([
-        {
-            path: '',
-            element : <RootLayout/>,
-            children : [
-                { path : '', element : <Dashboard/>},
-                { path : '/add', element : <AddCustomer/>},
-                { path : '/delete', element : <DeleteCustomer/>},
-                { path : '/update', element : <UpdateCustomer/>},
-                { path: "/add-item", element: <AddItem /> }, // Added route for adding an item
-               { path: "/update-item", element: <UpdateItem /> }, // Added route for updating an item
-                { path: "/delete-item", element: <DeleteItem /> }
-            ]
-        },
-    ])
+    const dispatch=useDispatch();
+
 
     return (
         <>
-            {/*<CustomerProvider>*/}
-            {/*    <RouterProvider router={routes} />*/}
-            {/*</CustomerProvider>*/}
-            <ItemProvider>
-                            <CustomerProvider>
-                              <RouterProvider router={routes} />
-                           </CustomerProvider>
-             </ItemProvider>
+            {count}
+            <br/>
+            <button onClick={() => dispatch({type:'INCREMENT',payload:1})}>INCREMENT</button>
+            <button onClick={() => dispatch({type:'DECREMENT',payload:1})}>DECREMENT</button>
+            <button onClick={() => dispatch({type:'TOGGLE',payload:1})}>TOGGLE</button>
+
         </>
     );
 }
 
 export default App
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 // import './App.css'

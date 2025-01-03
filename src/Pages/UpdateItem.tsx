@@ -1,7 +1,7 @@
 import {useNavigate} from "react-router";
 import {useContext, useState} from "react";
 import {ItemContext} from "../store/ItemProvider.tsx";
-import {Item} from "../models/Item.ts";;
+import {Item} from "../models/Item.ts";
 import {ItemModal} from "../component/ItemModal.tsx";
 
 export const UpdateItem = () => {
@@ -26,7 +26,7 @@ export const UpdateItem = () => {
             <header><h2>Update Item</h2></header>
             <br/>
             <ItemModal handleSubmit={handleSubmit} setCode={setCode} setName={setName} setPrice={setPrice}
-                       setQuantity={setQuantity}>Delete Item</ItemModal>
+                       setQuantity={setQuantity}>Update Item</ItemModal>
         </>
     );
 };
