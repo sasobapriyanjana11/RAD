@@ -13,23 +13,26 @@ import {DeleteItem} from "./Pages/DeleteItem.tsx";
 import {ItemProvider} from "./store/ItemProvider.tsx";
 import {useDispatch, useSelector} from "react-redux";
 import { Store } from './store/Store.ts';
+import {useState} from "react";
+import {decrement, increment,toolbar} from "./reducers/CountReducer.tsx";
+
 function App() {
-    const count=useSelector((state: number) => state);
+    const count = useSelector((state) => state.counter.count);
+    const show = useSelector((state) => state.counter.show);
 
-    const dispatch=useDispatch();
-
+    const dispatch = useDispatch();
 
     return (
         <>
-            {count}
-            <br/>
-            <button onClick={() => dispatch({type:'INCREMENT',payload:1})}>INCREMENT</button>
-            <button onClick={() => dispatch({type:'DECREMENT',payload:1})}>DECREMENT</button>
-            <button onClick={() => dispatch({type:'TOGGLE',payload:1})}>TOGGLE</button>
-
+            <h1>{show && count}</h1>
+            <button onClick={() => dispatch(increment())}>Increment</button>
+            <button onClick={() => dispatch(decrement())}>Decrement</button>
+            <button onClick={() => dispatch(toolbar())}>Toggle</button>
         </>
     );
+
 }
+
 
 export default App
 
@@ -481,5 +484,45 @@ export default App
 //         </ItemProvider>
 //     );
 // }
+//
+// export default App
+
+//function App() {
+//     const count=useSelector((state: string) => state);
+//
+//     const [customerName,setCustomerName] = useState("");
+//     const[itemName,setItemName] = useState("");
+//
+//     const dispatch=useDispatch();
+//
+//
+//     return (
+//         <>
+//             <input
+//                 type="text"
+//                 placeholder="Customer Name"
+//                 onChange={(e) => setCustomerName(e.target.value)}
+//                 value={customerName}
+//             />
+//             <button onClick={() => dispatch({ type: 'SET_CUSTOMER', payload: customerName })}>
+//                 print
+//             </button>
+//             <br />
+//
+//             <input
+//                 type="text"
+//                 placeholder="Item Name"
+//                 onChange={(e) => setItemName(e.target.value)}
+//                 value={itemName}
+//             />
+//             <button onClick={() => dispatch({ type: 'SET_ITEM', payload: itemName })}>
+//                 print
+//             </button>
+//             <br />
+//
+//         </>
+//             );
+// }
+//
 //
 // export default App

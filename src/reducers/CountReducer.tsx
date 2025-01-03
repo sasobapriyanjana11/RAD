@@ -1,13 +1,27 @@
-export const initialState = 0
-export function CountReducer(state:number=initialState, action:{type:string, payload:number}){
-    switch(action.type){
-        case 'INCREMENT':
-            return state +action.payload;
-        case 'DECREMENT':
-            return state - action.payload;
-        case 'TOGGLE':
-            return state - action.payload;
-            default:
-                return state;
+import {createSlice} from "@reduxjs/toolkit";
+
+export const initialState = {
+    count: 0,
+    show :true
+
+};
+
+export const countSlice = createSlice({
+    name: 'counter',
+    initialState,
+    reducers:{
+        increment: (state) => {
+            state.count += 1;
+        },
+        decrement: (state) => {
+            state.count -= 1;
+        },
+        toolbar: (state) => {
+            state.show = !state.show;
+        }
+
     }
-}
+})
+
+export const {increment,decrement,toolbar} = countSlice.actions;
+export default countSlice.reducer;
